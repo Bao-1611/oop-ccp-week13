@@ -3,108 +3,117 @@
 
 using namespace std;
 
-class People {
+class Employee {
 private:
     string CCCD;
-    string name;
+    string SDT;
     string address;
 public:
-    People() {
+    Employee() {
         CCCD = "";
-        name = "";
+        SDT = "";
         address = "";
     }
 
-    People(string c, string n, string a) {
+    Employee(string c, string s, string a) {
         CCCD = c;
-        name = n;
+        SDT = s;
         address = a;
     }
 
     string getCCCD() const { return CCCD; }
-    string getName() const { return name; }
+    string getSDT() const { return SDT; }
     string getAddress() const { return address; }
+
     void setCCCD(string c) { CCCD = c; }
-    void setName(string n) { name = n; }
+    void setSDT(string s) { SDT = s; }
     void setAddress(string a) { address = a; }
 
     void displayInfo() const {
         cout << "CCCD: " << CCCD << endl;
-        cout << "Name: " << name << endl;
+        cout << "SDT: " << SDT << endl;
         cout << "Address: " << address << endl;
     }
 };
 
-class Student : public People {
+class HourlyEmployee : public Employee {
 private:
-    string MSSV;
-    int yearEntrance;
+    int soGioLamViec;
+    double donGia;
 public:
-    Student() : People() {
-        MSSV = "";
-        yearEntrance = 0;
+    HourlyEmployee() : Employee() {
+        soGioLamViec = 0;
+        donGia = 0.0;
     }
 
-    Student(string c, string n, string a, string m, int y) 
-        : People(c, n, a) {
-        MSSV = m;
-        yearEntrance = y;
+    HourlyEmployee(string c, string s, string a, int soGio, double dg) 
+        : Employee(c, s, a) {
+        soGioLamViec = soGio;
+        donGia = dg;
     }
 
-    string getMSSV() const { return MSSV; }
-    int getYearEntrance() const { return yearEntrance; }
-    void setMSSV(string m) { MSSV = m; }
-    void setYearEntrance(int y) { yearEntrance = y; }
+    int getSoGioLamViec() const { return soGioLamViec; }
+    double getDonGia() const { return donGia; }
+
+    void setSoGioLamViec(int soGio) { soGioLamViec = soGio; }
+    void setDonGia(double dg) { donGia = dg; }
 
     void displayInfo() const {
-        People::displayInfo(); 
-        cout << "MSSV: " << MSSV << endl;
-        cout << "Year Entrance: " << yearEntrance << endl;
+        Employee::displayInfo();
+        cout << "So gio lam viec: " << soGioLamViec << endl;
+        cout << "Don gia: " << donGia << endl;
     }
 };
 
-class FIEStudent : public Student {
+class MonthlyEmployee : public Employee {
 private:
-    int credits;
+    double luongCoBan;
+    double phuCap;
+    double heSoThuong;
 public:
-    FIEStudent() : Student() {
-        credits = 0;
+    MonthlyEmployee() : Employee() {
+        luongCoBan = 0.0;
+        phuCap = 0.0;
+        heSoThuong = 0.0;
     }
 
-    FIEStudent(string c, string n, string a, string m, int y, int cr) 
-        : Student(c, n, a, m, y) {
-        credits = cr;
+    MonthlyEmployee(string c, string s, string a, double lcb, double pc, double hs) 
+        : Employee(c, s, a) {
+        luongCoBan = lcb;
+        phuCap = pc;
+        heSoThuong = hs;
     }
 
-    int getCredits() const { return credits; }
-    void setCredits(int cr) { credits = cr; }
+    double getLuongCoBan() const { return luongCoBan; }
+    double getPhuCap() const { return phuCap; }
+    double getHeSoThuong() const { return heSoThuong; }
+
+    void setLuongCoBan(double lcb) { luongCoBan = lcb; }
+    void setPhuCap(double pc) { phuCap = pc; }
+    void setHeSoThuong(double hs) { heSoThuong = hs; }
 
     void displayInfo() const {
-        Student::displayInfo();
-        cout << "Credits: " << credits << endl;
+        Employee::displayInfo();
+        cout << "Luong co ban: " << (long long)luongCoBan << endl;
+        cout << "Phu cap: " << (long long)phuCap << endl;
+        cout << "He so thuong: " << heSoThuong << endl;
     }
 };
 
 int main() {
-    People p1;
-    cout << "--- People p1 (mặc định) ---" << endl;
-    p1.displayInfo();
+    Employee e1;
+    cout << "--- Employee e1 ---" << endl;
+    e1.displayInfo();
     cout << endl;
 
-    People p2("079123456789", "Nguyen Van A", "Ho Chi Minh");
-    cout << "--- People p2 (có tham số) ---" << endl;
-    p2.displayInfo();
+    HourlyEmployee h1("079123456789", "0901002003", "Ha Noi", 160, 50000);
+    cout << "--- HourlyEmployee h1 ---" << endl;
+    h1.displayInfo();
     cout << endl;
 
-    Student s1("079123456789", "Tran Thi B", "Ha Noi", "SV001", 2023);
-    cout << "--- Student s1 ---" << endl;
-    s1.displayInfo();
-    cout << endl;
-
-    FIEStudent f1("079987654321", "Le Minh C", "Da Nang", "FIE2023001", 2023, 120);
-    cout << "--- FIEStudent f1 ---" << endl;
-    f1.displayInfo();
-    cout << endl;
+    MonthlyEmployee m1("079987654321", "0903004005", "Da Nang", 15000000, 2000000, 1.2);
+    cout << "--- MonthlyEmployee m1 ---" << endl;
+    m1.displayInfo();
 
     return 0;
 }
