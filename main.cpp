@@ -10,9 +10,9 @@ private:
     string address;
 public:
     People() {
-        CCCD = "000000000000";
-        name = "Unknown";
-        address = "Unknown";
+        CCCD = "";
+        name = "";
+        address = "";
     }
 
     People(string c, string n, string a) {
@@ -27,6 +27,12 @@ public:
     void setCCCD(string c) { CCCD = c; }
     void setName(string n) { name = n; }
     void setAddress(string a) { address = a; }
+
+    void displayInfo() const {
+        cout << "CCCD: " << CCCD << endl;
+        cout << "Name: " << name << endl;
+        cout << "Address: " << address << endl;
+    }
 };
 
 class Student : public People {
@@ -35,7 +41,7 @@ private:
     int yearEntrance;
 public:
     Student() : People() {
-        MSSV = "N/A";
+        MSSV = "";
         yearEntrance = 0;
     }
 
@@ -49,6 +55,12 @@ public:
     int getYearEntrance() const { return yearEntrance; }
     void setMSSV(string m) { MSSV = m; }
     void setYearEntrance(int y) { yearEntrance = y; }
+
+    void displayInfo() const {
+        People::displayInfo(); 
+        cout << "MSSV: " << MSSV << endl;
+        cout << "Year Entrance: " << yearEntrance << endl;
+    }
 };
 
 class FIEStudent : public Student {
@@ -68,31 +80,31 @@ public:
     void setCredits(int cr) { credits = cr; }
 
     void displayInfo() const {
-        cout << "CCCD: " << getCCCD() << endl;
-        cout << "Name: " << getName() << endl;
-        cout << "Address: " << getAddress() << endl;
-        cout << "MSSV: " << getMSSV() << endl;
-        cout << "Year Entrance: " << getYearEntrance() << endl;
+        Student::displayInfo();
         cout << "Credits: " << credits << endl;
-        cout << "-----------------------" << endl;
     }
 };
 
 int main() {
     People p1;
-    People p2("079123456789", "Tran Ngoc Quoc Thinh", "Ho Chi Minh");
+    cout << "--- People p1 (mặc định) ---" << endl;
+    p1.displayInfo();
+    cout << endl;
 
-    Student s1; 
-    Student s2("079123456789", "Le Trung Hieu", "Thanh Hoa", "SV001", 2023);
+    People p2("079123456789", "Nguyen Van A", "Ho Chi Minh");
+    cout << "--- People p2 (có tham số) ---" << endl;
+    p2.displayInfo();
+    cout << endl;
 
-    FIEStudent f1;
-    FIEStudent f2("079987654321", "Le Minh Huy", "Phu Quoc", "FIE2023001", 2023, 120);
+    Student s1("079123456789", "Tran Thi B", "Ha Noi", "SV001", 2023);
+    cout << "--- Student s1 ---" << endl;
+    s1.displayInfo();
+    cout << endl;
 
-    cout << "== Thong tin doi tuong f1 (khoi tao mac dinh) ==" << endl;
+    FIEStudent f1("079987654321", "Le Minh C", "Da Nang", "FIE2023001", 2023, 120);
+    cout << "--- FIEStudent f1 ---" << endl;
     f1.displayInfo();
-
-    cout << "== Thong tin doi tuong f2 (khoi tao co tham so) ==" << endl;
-    f2.displayInfo();
+    cout << endl;
 
     return 0;
 }
